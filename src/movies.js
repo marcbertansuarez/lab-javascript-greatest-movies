@@ -6,20 +6,13 @@ function getAllDirectors(moviesArray) {
     return allDirectors;
 }
 
-//console.log(getAllDirectors(movies))
-
 const filteredDirectors = getAllDirectors(movies).filter((directors, index) => getAllDirectors(movies).indexOf(directors) === index);
-
-//console.log(filteredDirectors);
-
-
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
 function howManyMovies(moviesArray) {
     const stevenDramaMovies = moviesArray.filter((obj) => obj.director === 'Steven Spielberg' && obj.genre.includes('Drama')) 
     return stevenDramaMovies.length
 }
-//console.log (howManyMovies(movies));
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 function scoresAverage(moviesArray) {
@@ -27,12 +20,10 @@ function scoresAverage(moviesArray) {
         return 0;
     }
     const scoresArray = moviesArray.map(elem => elem.score);
-    console.log(scoresArray)
     const moviesWithScore = scoresArray.filter(scores => typeof scores === "number")
-    const scoresAverageMovies = moviesWithScore.reduce((acc, value) => acc + value, 0);
+    const scoresAverageMovies = moviesWithScore.reduce((acc, value) => acc + value);
     return parseFloat((scoresAverageMovies / moviesArray.length).toFixed(2))
 }
-//console.log(scoresAverage(movies))
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore(moviesArray) {
     const dramaMovies = moviesArray.filter(obj => obj.genre.includes('Drama'))
@@ -42,7 +33,6 @@ function dramaMoviesScore(moviesArray) {
     const avgDramaMovies = dramaMovies.reduce((acc, value) => acc + value.score, 0);
     return parseFloat((avgDramaMovies / dramaMovies.length).toFixed(2));    
 }
-//console.log(dramaMoviesScore(movies))
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) {
@@ -55,7 +45,6 @@ function orderByYear(moviesArray) {
         return 0 });   
     return moviesOrderedByYear
 }
-//console.log(orderByYear(movies));
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically(moviesArray) {
@@ -70,12 +59,18 @@ function orderAlphabetically(moviesArray) {
             return moviesOrderAlphabetically.slice(0, 20);
         }
 }
-//console.log(orderAlphabetically(movies))
-
-
-
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(moviesArray) {}
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-function bestYearAvg(moviesArray) {}
+function bestYearAvg(moviesArray) {
+    if (moviesArray.length === 0) {
+        return null;
+    }
+    const scoreArray = moviesArray.map(elem => elem.score);
+    const bestScore = scoreArray.sort((a, b) => a - b);
+    const indexOfBestScore = bestScore[bestScore.length - 1]
+    const indexBestScoreArray = moviesArray.find((elem) => elem.score === indexOfBestScore)
+    return `The best year was ${indexBestScoreArray.year} with an average score of ${indexBestScoreArray.score}`
+}
+//El resulto parece que me da bien pero no sé si lo he hecho correctamente. No estoy nada convencido!
